@@ -4,6 +4,10 @@
 
 https://blog.csdn.net/You_are_my_dream/article/details/65631162
 
+### question
+
+1. 同样都是并查集问题，社交集群与冰岛家谱有什么区别与联系？
+
 ## 知识点
 
 ### tips
@@ -89,6 +93,8 @@ void join(int a, int b) {
   fa[a] = b;//将a的祖先指向b的祖先
 }
 ```
+
+### 回溯
 
 
 

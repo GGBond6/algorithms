@@ -7,5 +7,6 @@ add_executable(algorithms main.cpp)
 add_executable(test test.cpp)
 add_executable(Exercise6_7_1_Set_similarity Exercise6/7_1_Set_similarity.cpp)
 add_executable(Exercise6_7_2_Social_cluster Exercise6/7_2_Social_cluster.cpp)
-
-add_executable(Exercise6_7_3_Iceland's_family_tree Exercise6/7_3_Iceland's_family_tree.cpp)
+add_executable(Exercise6_7_3_Iceland_family_tree Exercise6/7_3_Iceland_family_tree.cpp)
+add_executable(Exercise6_7_4_Subset_sum_problem Exercise6/7_4_Subset_sum_problem.cpp)
+add_executable(Exercise6_7_5_Look_at_pictures_to_find_gay_friends Exercise6/7_5_Look_at_pictures_to_find_gay_friends.cpp)
