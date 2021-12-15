@@ -13,3 +13,4 @@ add_executable(Exercise6_7_5_Look_at_pictures_to_find_gay_friends Exercise6/7_5_
 add_executable(Exercise6_7_9_Windows_message_queue Exercise6/7_9_Windows_message_queue.cpp)
 add_executable(Exercise6_7_7_Sequence_block Exercise6/7_7_Sequence_block.cpp)
 add_executable(Exercise6_7_6_Half_of_the_set Exercise6/7_6_Half_of_the_set.cpp)
+add_executable(Exercise6_7_8_Redundant_links Exercise6/7_8_Redundant_links.cpp)
