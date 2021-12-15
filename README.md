@@ -4,6 +4,38 @@
 
 https://blog.csdn.net/You_are_my_dream/article/details/65631162
 
+#### 半数集
+
+半数集的产生过程可以看做是一个多叉树结构
+
+![img](https://img-blog.csdnimg.cn/2021050609045397.png)
+
+那么我们使用深度优先搜索将树结构遍历一遍，即可得到半数集中元素的个数
+
+```c++
+//求n的半数集个数
+int dfs(int n) {
+  //递归出口：半数集只有自身
+  if (n <= 1) {
+    return 1;
+  }
+  int res = 1;//自己本身肯定在半数集中，那么res初值为1
+  for (int i = 1; i <= n / 2; ++i) {//可以将半数集看成一个多叉树，这里是遍历多叉树
+    res += dfs(i);
+  }
+  return res;
+}
+```
+
+#### 子集和问题
+
+> 典型的回溯问题
+
+给n个不同的正整数集合w和一个正数W，要求找出w的子集，该子集中的所有元素之和为W
+
+- 在将路径加入结果集时，需要判断是否和已有结果集元素重复（或在做选择时排除不合法的选择）
+- 因为这是多叉树，那么递归结构需要for循环，来遍历选择列表中的每一个选项
+
 ### question
 
 1. 同样都是并查集问题，社交集群与冰岛家谱有什么区别与联系？
@@ -96,15 +128,87 @@ void join(int a, int b) {
 
 ### 回溯
 
+[https://github.com/labuladong/fucking-algorithm/blob/master/%E7%AE%97%E6%B3%95%E6%80%9D%E7%BB%B4%E7%B3%BB%E5%88%97/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3%E4%BF%AE%E8%AE%A2%E7%89%88.md](https://github.com/labuladong/fucking-algorithm/blob/master/算法思维系列/回溯算法详解修订版.md)
 
+**解决一个回溯问题，实际上就是一个决策树的遍历过程**。你只需要思考 3 个问题：
 
+1、路径：也就是已经做出的选择。
 
+2、选择列表：也就是你当前可以做的选择。
 
+3、结束条件：也就是到达决策树底层，无法再做选择的条件。
 
+回溯就是在遍历下个节点前，做出选择的操作，遍历之后，再撤销选择
 
+```python
+result = []
+def backtrack(路径, 选择列表):
+    if 满足结束条件:
+        result.add(路径)
+        return
+    
+    for 选择 in 选择列表:
+        做选择
+        backtrack(路径, 选择列表)
+        撤销选择
+```
 
+核心代码如下：
 
+- 做选择：从选择列表移除，加入路径
+- 撤销选择：从路径移除，加入选择列表
 
+```python
+for 选择 in 选择列表:
+    # 做选择
+    将该选择从选择列表移除
+    路径.add(选择)
+    backtrack(路径, 选择列表)
+    # 撤销选择
+    路径.remove(选择)
+    将该选择再加入选择列表
+```
+
+#### 例子
+
+[子集和问题](#子集和问题)
+
+### 递归
+
+函数自己调用自己，把当前问题转化为<strong style="color:#92d050;">性质相同但是规模更小</strong>的子问题
+
+有两个特征：
+
+- 递归出口
+- 自我调用
+
+自我调用是在解决子问题，而递归出口定义了最简子问题的答案
+
+比如上面的并查集模板中的find函数：递归出口是定义了最简子问题的答案，自我调用时规模更小但是性质相同
+
+**<strong style="color:#ff0000;">明白一个函数的作用并相信它能完成这个任务，千万不要试图跳进细节</strong>。**千万不要跳进这个函数里面企图探究更多细节，否则就会陷入无穷的细节无法自拔，人脑能压几个栈啊
+
+- 遍历二叉树
+
+  ```
+  void traverse(TreeNode* root) {
+      if (root == nullptr) return;
+      traverse(root->left);
+      traverse(root->right);
+  }
+  ```
+
+- 遍历多叉树
+
+  使用for循环遍历多叉树，可以参考[半数集](#半数集)
+
+  ```
+  void traverse(TreeNode* root) {
+      if (root == nullptr) return;
+      for (child : root->children)
+          traverse(child);
+  }
+  ```
 
 
 
