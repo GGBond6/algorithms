@@ -136,6 +136,26 @@ int dfs(int n) {
 - 又分别有sex字符数组和vis整型数组
 - 使用dfs进行遍历
 
+#### 分解素因子
+
+> 将一个整数分解为若干个素数的乘积
+
+判断当前数是否为质数，只需要判断sqrt(n)次即可，因为以此为分界，前后因式一样
+
+定义函数f(int x)，作用是将x分解为若干个素数的乘积，并且在开始设置一个质数标志位，如果在[2,sqrt(x)]中没有任何的因子，那么它本省就是一个质数，直接加入进结果集即可
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -375,6 +395,88 @@ for 选择 in 选择列表:
   3. 重复步骤2，直到找到目标元素或队列为空（没找到目标元素）
 
 - 
+
+### 滑动窗口
+
+滑动窗口算法是在一个**特定大小的字符串或数组上进行操作，而不在整个字符串和数组上操作**，这就降低了问题的复杂度，从而也降低了循环的嵌套深度。滑动窗口主要应用在数组和字符串的场景。
+
+对于类似“请找到满足 xx 的最 x 的区间（子串、子数组）的 xx ”这类问题都可以使用该方法进行解决。
+
+
+
+### 二分查找
+
+#### 寻找一个数
+
+```c++
+int binarySearch(int arr[], int target) {
+  int left = 0, right = n - 1;
+  while (left <= right) {//数组不为空
+    int mid = (left + right) / 2;
+    if (arr[mid] == target) {
+      return mid;
+    } else if (arr[mid] < target) {//target在mid右部
+      left = mid + 1;
+    } else {//target在mid左部
+      right = mid - 1;
+    }
+  }
+  return -1;
+}
+```
+
+#### 寻找左侧边界的二分查找
+
+```c++
+//寻找左侧边界的二分查找
+int leftBound(int arr[], int target) {
+  int left = 0, right = n - 1;
+  while (left <= right) {//数组不为空
+    int mid = (left + right) / 2;
+    if (arr[mid] == target) {
+      right = mid - 1;//因为要找左边界，那么缩小右侧边界，不断向左收缩
+    } else if (arr[mid] < target) {//target在mid右部
+      left = mid + 1;
+    } else {//target在mid左部
+      right = mid - 1;
+    }
+  }
+  //检查越界
+  if (left >= n || arr[left] != target)
+    return -1;
+  return left;
+}
+```
+
+#### 寻找右侧边界的二分查找
+
+```c++
+//寻找右侧边界的二分查找：在
+int rightBound(int arr[], int target) {
+  int left = 0, right = n - 1;
+  while (left <= right) {//数组不为空
+    int mid = (left + right) / 2;
+    if (arr[mid] == target) {
+      left = mid + 1;
+    } else if (arr[mid] < target) {//target在mid右部
+      left = mid + 1;
+    } else {//target在mid左部
+      right = mid - 1;
+    }
+  }
+  //越界检查
+  if (arr[right] != target || right < 0) {
+    return -1;
+  }
+  return right;//left=right+1
+}
+```
+
+
+
+
+
+
 
 
 
